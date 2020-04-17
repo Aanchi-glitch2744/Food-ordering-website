@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Food Web</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #f1f1f1;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.main {
+  padding: 16px;
+  margin-bottom: 30px;
+}
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <a href="#home"> Home</a>
+  <div class="dropdown">
+  	 <button class="dropdown-btn">Cuisines
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Butter Chicken</a>
+    <a href="#">Biriyani</a>
+    <a href="#">Paneer</a>
+    <a href="#">Idli</a>
+    <a href="#">Fried Rice</a>
+    <a href="#">Dosa</a>
+    <a href="#">Chowmin</a>
+    <a href="#">Egg Curry</a>
+    <a href="#">Manchurian</a>
+    <a href="#">Naan- Tandoori Roti</a>
+  </div>
+  	 <button class="dropdown-btn">Popular Restaurants
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Haveli</a>
+    <a href="#">Biriyani</a>
+    <a href="#">Barbeque Nation</a>
+    <a href="#">Lovely Italy</a>
+    <a href="#">KFC</a>
+    <a href="#">Mc. Donalds</a>
+    <a href="#">Burger Kings</a>
+    <a href="#">Sagar Ratna</a>
+    <a href="#">Kaata Churi</a>
+  </div>
+   <button class="dropdown-btn">Popular Cities
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Jalandhar</a>
+    <a href="#">Phagwara</a>
+    <a href="#">Ludhiana</a>
+    <a href="#">Amritsar</a>
+    <a href="#">Chandigarh</a>
+  </div>
+   <button class="dropdown-btn">COUPONS
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">First time </a>
+    <a href="#">Paytm</a>
+    <a href="#">First five offers</a>
+  </div>
+   <button class="dropdown-btn"> Top Food Brands
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Barbeque Nation</a>
+    <a href="#">Haveli</a>
+    <a href="#">KFC</a>
+    <a href="#">Mc. Donalds</a>
+    <a href="#">Burger Kings</a>
+    <a href="#">Sagar Ratna</a>
+  </div>
+  </div>
+</div>
+<div class="main">	
+<div class="btn-group">
+  <button type="button" class="btn btn-dark">Select City</button>
+  <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item">Jalandhar</a>
+    <a class="dropdown-item">Ludhiana</a>
+    <a class="dropdown-item">Amritsar</a>
+    <a class="dropdown-item">Patiala</a>
+    <a class="dropdown-item">Bhatinda</a>
+    <a class="dropdown-item">Hoshiarpur</a>
+    <a class="dropdown-item">Mohali</a>
+    <a class="dropdown-item">Batala</a>
+    <a class="dropdown-item">Pathankot</a>
+    <a class="dropdown-item">Moga</a>
+    <a class="dropdown-item">Abohar</a>
+    <a class="dropdown-item">Malerkotla</a>
+    <a class="dropdown-item">Khanna</a>
+    <a class="dropdown-item">Phagwara</a>
+    <a class="dropdown-item">Muktasar</a>
+    <a class="dropdown-item">Barnala</a>
+    <a class="dropdown-item">Patiala</a>
+    <a class="dropdown-item">Firozpur</a>
+    <a class="dropdown-item">Kapurthala</a>
+    <a class="dropdown-item">Sunam</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Other/ Outside Punjab</a>
+  </div>
+</div>
+<div class="btn-group">
+<a href="" button type="button" class="btn btn-dark" >Your Area</button></a>
+</div>
+<div class="btn-group">
+<a href="" button type="button" class="btn btn-dark" >Open Restaurants</button></a>
+</div>
+<div class="container">
+  <h2>Take a ride to our food varities...</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food1.jpg" style="width:100%">
+          <div class="caption">
+            <p>Try our new bread dishes!!!</p>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food2.jpg" style="width:100%">
+          <div class="caption">
+            <p>Non-veg, whenever you want.</p>
+          </div>
+   
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food3.jpg" style="width:100%">
+          <div class="caption">
+            <p>Luxurious Pizzas and fast food at best prices.</p>
+          </div>
+      </div>
+    </div>
+  <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food4.jpg" style="width:100%">
+          <div class="caption">
+            <p>Have something sweet and fresh which melts at your wishes.</p>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food5.jpg" style="width:100%">
+          <div class="caption">
+            <p>Best chappatis, rolls and dishes for any moment.</p>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="images/food6.jpg" style="width:100%">
+          <div class="caption">
+            <p>Having a snack, try something new.</p>
+          </div>
+      </div>
+    </div>
+</div>
+</div>
+<br>
+<section>
+	<div class="main">
+ONGOING DISCOUNTS...
+	<div class="d-flex flex-row-reverse bg-secondary">
+
+  <div class="p-2 bg-info">BUY 50% OFF</div>
+  <div class="p-2 bg-warning">Pay via Wallets and enjoy great off!</div>
+</div><br><br><br><br><br>
+</div>	
+</section>
+
+
+</div>
+<div class="navbar">
+  <a href="#home" class="active">Home</a>
+  <a href="login.html">Login/ SignUp</a>
+  <a href="Pay.html">Payment Gateway</a>
+  <a href="Track.html">Track your order</a>
+  
+  <button data-toggle="collapse" data-target="#demo">Contact now</button>
+
+				<div id="demo" class="collapse">
+				Please fill the details:
+				<div class="w-50 mx-auto">
+				<div class="container">
+  <form action="action_page.php">
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">India</option>
+      <option value="canada">Sri Lanka</option>
+      <option value="usa">Nepal</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+</div>
+				</div>
+</div>
+
+
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
